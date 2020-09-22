@@ -7,6 +7,7 @@ class NewsItemWidget extends StatelessWidget {
 
   NewsItemWidget(this.newsItem);
 
+  //open urls
   _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);

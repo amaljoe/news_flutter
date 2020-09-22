@@ -17,6 +17,7 @@ class _MainScreenState extends State<MainScreen> {
     getNewsData();
   }
 
+  //populate news items
   void getNewsData() async {
     setState(() {
       showSpinner = true;
@@ -26,11 +27,11 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       showSpinner = false;
     });
-    print('getting back also');
   }
 
   @override
   Widget build(BuildContext context) {
+    //spinner shown while retrieving data from API
     if (showSpinner) {
       return Scaffold(
         appBar: AppBar(
@@ -49,6 +50,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         actions: [
+          //refresh button used to make a fresh API call and get updated data
           IconButton(
             onPressed: () {
               getNewsData();

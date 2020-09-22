@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//model class for each news item retrieved from API
 class NewsItem {
   String providerName;
   String title;
