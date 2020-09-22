@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import 'package:news_flutter/utilities/news_item.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+class NewsItemWidget extends StatelessWidget {
+  final NewsItem newsItem;
+
+  NewsItemWidget(this.newsItem);
+
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              newsItem.title ?? '',
+              style: TextStyle(
+                  fontFamily: 'roboto',
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              newsItem.providerName ?? '',
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                  fontFamily: 'roboto',
+                  fontSize: 18,
+                  color: Colors.blue,
+                  fontStyle: FontStyle.italic),
+            ),
+            Text(
+              newsItem.description ?? '',
+              style: TextStyle(
+                fontFamily: 'roboto',
+                fontSize: 16,
+              ),
+            ),
+            Padding(
+                padding: EdgeInsets.all(10),
+                child: Image.network(newsItem.imageUrl ?? '')),
+            FlatButton(
+              onPressed: () {
+                _launchURL(newsItem.url ?? '');
+              },
+              child: Text(
+                newsItem.url,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    decoration: TextDecoration.underline, color: Colors.blue),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              newsItem.time ?? '',
+              textAlign: TextAlign.right,
+              style: TextStyle(
+                  fontFamily: 'roboto', fontSize: 18, color: Colors.black45),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
