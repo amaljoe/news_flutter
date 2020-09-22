@@ -30,14 +30,20 @@ class NewsItemWidget extends StatelessWidget {
                   fontSize: 22,
                   fontWeight: FontWeight.bold),
             ),
+            SizedBox(
+              height: 10,
+            ),
             Text(
               newsItem.providerName ?? '',
               textAlign: TextAlign.right,
               style: TextStyle(
                   fontFamily: 'roboto',
                   fontSize: 18,
-                  color: Colors.blue,
+                  color: Colors.blueAccent,
                   fontStyle: FontStyle.italic),
+            ),
+            SizedBox(
+              height: 10,
             ),
             Text(
               newsItem.description ?? '',
@@ -50,6 +56,7 @@ class NewsItemWidget extends StatelessWidget {
                 padding: EdgeInsets.all(10),
                 child: Image.network(newsItem.imageUrl ?? '')),
             FlatButton(
+              padding: EdgeInsets.all(0),
               onPressed: () {
                 _launchURL(newsItem.url ?? '');
               },
@@ -67,7 +74,7 @@ class NewsItemWidget extends StatelessWidget {
               newsItem.time ?? '',
               textAlign: TextAlign.right,
               style: TextStyle(
-                  fontFamily: 'roboto', fontSize: 18, color: Colors.black45),
+                  fontFamily: 'roboto', fontSize: 18, color: Colors.white70),
             ),
           ],
         ),

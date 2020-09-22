@@ -48,6 +48,17 @@ class _MainScreenState extends State<MainScreen> {
     }
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              getNewsData();
+            },
+            icon: Icon(
+              Icons.refresh,
+              color: Colors.white,
+            ),
+          )
+        ],
         title: Text(
           'News',
           style: TextStyle(
@@ -56,10 +67,23 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(8.0),
+        padding: EdgeInsets.all(12.0),
         child: ListView.builder(
-          itemCount: newsItems.length,
+          physics: BouncingScrollPhysics(),
+          itemCount: newsItems.length + 1,
           itemBuilder: (context, index) {
+            if (index == newsItems.length) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                height: 50,
+                child: Center(
+                  child: Text(
+                    'All Caught Up',
+                    style: TextStyle(fontFamily: 'roboto', fontSize: 20),
+                  ),
+                ),
+              );
+            }
             return NewsItemWidget(newsItems[index]);
           },
         ),
